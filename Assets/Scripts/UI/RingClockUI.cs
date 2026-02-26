@@ -18,9 +18,9 @@ public class RingClockUI : MonoBehaviour
         ClockHand = GetComponent<Image>();
     }
 
-    void UpdateFillAmount(float percentage)
+    void UpdateFillAmount(IWorldTime worldTime)
     {
-        fillAmount = percentage;
+        fillAmount = worldTime.CurrentHour / 24f;
         ClockHand.fillAmount = fillAmount;
         isUpdateNeeded = true;
     }

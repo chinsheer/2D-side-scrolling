@@ -7,7 +7,7 @@ public class ClockController : MonoBehaviour
     private IWorldTime _worldTime;
     private float _timeSinceLastUpdate = 0f;
 
-    public event Action<float> OnClockUpdate; // passes the current time
+    public event Action<IWorldTime> OnClockUpdate; // passes the current time
     void Start()
     {
         _worldTime = WorldTime.Instance;
@@ -22,8 +22,7 @@ public class ClockController : MonoBehaviour
             if (_timeSinceLastUpdate >= UpdateInterval)
             {
                 _timeSinceLastUpdate = 0f;
-                float currentTime = _worldTime.CurrentHour;
-                OnClockUpdate?.Invoke(currentTime);
+                OnClockUpdate?.Invoke(_worldTime);
             }
         }
     }

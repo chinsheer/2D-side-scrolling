@@ -28,11 +28,11 @@ public class WorldTime : MonoBehaviour, IWorldTime
     [SerializeField] public float TimeAfternoon = 12f;
     [SerializeField] public float TimeEvening = 18f;
 
-    private float _currentTime = 0f;
+    private float _currentTime = 0f; // In seconds
     private int _currentDay = 0; //Avoiding overflow of _currentTime float
 
     public float CurrentTime { get => _currentTime; }
-    public float CurrentHour { get => _currentTime % 24f; }
+    public float CurrentHour { get => _currentTime / 3600f; }
     public int CurrentDay { get => _currentDay; }
     public TimeOfDay CurrentTimeOfDay
     {
@@ -76,20 +76,20 @@ public class WorldTime : MonoBehaviour, IWorldTime
 
     void Update()
     {
-        _currentTime += Time.deltaTime * TimeScale / 3600f;
-        if (_currentTime >= 24f)
+        _currentTime += Time.deltaTime * TimeScale;
+        if (CurrentHour >= 24f)
         {
-            _currentTime -= 24f;
+            _currentTime = 0f;
             _currentDay++;
         }
     }
 
     public void AddTime(float hours)
     {
-        _currentTime += hours;
-        if (_currentTime >= 24f)
+        _currentTime += hours * 3600f;
+        if (CurrentHour >= 24f)
         {
-            _currentTime -= 24f;
+            _currentTime = 0f;
             _currentDay++;
         }
     }

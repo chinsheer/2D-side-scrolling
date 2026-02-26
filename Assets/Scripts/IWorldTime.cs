@@ -4,6 +4,7 @@ public interface IWorldTime
     float CurrentHour { get; }
     int CurrentDay { get; }
     WorldTime.TimeOfDay CurrentTimeOfDay { get; }
+    WorldTime.WeekDay CurrentWeekDay { get; }
 
     void AddTime(float hours);
     void SetTime(float hours);
