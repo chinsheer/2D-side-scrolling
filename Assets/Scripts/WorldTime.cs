@@ -79,8 +79,7 @@ public class WorldTime : MonoBehaviour, IWorldTime
         _currentTime += Time.deltaTime * TimeScale;
         if (CurrentHour >= 24f)
         {
-            _currentTime = 0f;
-            _currentDay++;
+            StartNewDay();
         }
     }
 
@@ -89,9 +88,13 @@ public class WorldTime : MonoBehaviour, IWorldTime
         _currentTime += hours * 3600f;
         if (CurrentHour >= 24f)
         {
-            _currentTime = 0f;
-            _currentDay++;
+            StartNewDay();
         }
+    }
+
+    public void AddTime(int days)
+    {
+        _currentDay += days;
     }
 
     public void SetTime(float hours)
@@ -102,6 +105,11 @@ public class WorldTime : MonoBehaviour, IWorldTime
             _currentDay++;
         }
         _currentTime = hours * 3600f;
+    }
+
+    public void SetTime(int day)
+    {
+        _currentDay = day;
     }
 
     public void SetTime(TimeOfDay timeOfDay)
@@ -119,6 +127,13 @@ public class WorldTime : MonoBehaviour, IWorldTime
                 break;
         }
     }
+
+    public void SetTime(WeekDay weekDay)
+    {
+        // Shift to the next occurrence of the specified weekday (won't go back)
+        _currentDay += ((int)weekDay + 7 - (int)CurrentWeekDay) % 7; 
+    }
+
 
     public void StartNewDay()
     {
