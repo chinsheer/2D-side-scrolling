@@ -14,11 +14,14 @@ public class PlayerController : MonoBehaviour
 
     public float MoveSpeed { get => _moveSpeed; }
     public float JumpForce { get => _jumpForce; }
+
+    public Inventory PlayerInventory { get; private set; }
     
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        PlayerInventory = GetComponent<Inventory>();
         _playerInput = GetComponent<IMoveInputSource>();
     }
 
