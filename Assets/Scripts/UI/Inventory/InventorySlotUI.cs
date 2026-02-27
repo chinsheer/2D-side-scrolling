@@ -52,4 +52,10 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler
             draggable.SetSource(ownerInventory, slotIndex);
         }
     }
+
+    public void SetSelected(bool selected)
+    {
+        var selectedHighlight = transform.Find("Select").gameObject;
+        selectedHighlight.SetActive(selected);
+    }
 }

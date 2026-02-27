@@ -34,6 +34,19 @@ public class PlayerInput : MonoBehaviour, IMoveInputSource
             bookUI.ToggleVisibility();
         }
 
+        // Combat input
+        // Hotbar selection
+        if (Input.GetKeyDown(KeyCode.Alpha1)) combat.SetSelectedSlot(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) combat.SetSelectedSlot(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) combat.SetSelectedSlot(2);
+        if (Input.GetKeyDown(KeyCode.Alpha4)) combat.SetSelectedSlot(3);
+
+        // Mouse
+        if (Input.GetMouseButtonDown(0)) // Left click
+        {
+            combat.TryUseItem();
+        }
+
         if (Input.GetMouseButtonDown(1)) // Right click
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

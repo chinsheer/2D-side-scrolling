@@ -19,7 +19,7 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    public void TryUseItem(Vector2 aimDirection)
+    public void TryUseItem()
     {
         // Here you could use the currently selected item in the inventory
     }
@@ -41,5 +41,10 @@ public class PlayerCombat : MonoBehaviour
             Destroy(_currentAimIndicator);
             _currentAimIndicator = null;
         }
+    }
+
+    public void SetSelectedSlot(int index)
+    {
+        _playerInventory.SetSelectedSlot(index);
     }
 }

@@ -8,10 +8,13 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Inventory _inventory;
     public GameObject SlotPrefab;
 
+    private int selectedSlotIndex = 0;
+
     public void Start()
     {
         RefreshUI();
         _inventory.OnInventoryChanged += RefreshUI;
+        _inventory.OnSelectedSlotChanged += RefreshSelectedSlot;
     }
 
     public void RefreshUI()
@@ -30,7 +33,17 @@ public class InventoryUI : MonoBehaviour
             {
                 placeHolder = Instantiate(SlotPrefab, transform).transform;
             }
-            placeHolder.GetComponent<InventorySlotUI>().Initialize(_inventory, i);
+            var slotUI = placeHolder.GetComponent<InventorySlotUI>();
+            slotUI.Initialize(_inventory, i);
+            slotUI.SetSelected(i == _inventory.SelectedSlotIndex);
         }
+    }
+
+    // Refresh only the selected slot highlight
+    public void RefreshSelectedSlot(int selectIndex)
+    {
+        transform.GetChild(selectedSlotIndex).GetComponent<InventorySlotUI>().SetSelected(false); // Deselect previous
+        transform.GetChild(selectIndex).GetComponent<InventorySlotUI>().SetSelected(true); // Select new
+        selectedSlotIndex = selectIndex;
     }
 }
