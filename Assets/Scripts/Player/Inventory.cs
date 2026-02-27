@@ -16,6 +16,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private InventoryType inventoryType;   
 
     public List<InventorySlot> Slots => slots;
+    public InventoryType Type => inventoryType;
 
     public event Action OnInventoryChanged;
 

@@ -9,7 +9,7 @@ public class EventContextProvider : MonoBehaviour
         var context = new EventContext
         {
             investigator = gameObject,
-            PlayerInventory = gameObject.GetComponent<Inventory>()
+            PlayerInventory = gameObject.GetComponentsInChildren<Inventory>()
         };
         return context;
     }

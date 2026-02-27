@@ -8,5 +8,5 @@ public abstract class EventAction : ScriptableObject
 public struct EventContext
 {
     public GameObject investigator;   // who triggered it (player)
-    public Inventory PlayerInventory; // player's inventory, for convenience
+    public Inventory[] PlayerInventory; // player's inventory, for convenience
 }
