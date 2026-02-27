@@ -8,8 +8,11 @@ public class EnemyController : MonoBehaviour
     private IMoveInputSource _enemyInput;
 
     private bool _isGrounded = false;
-    [SerializeField] public float _moveSpeed = 3f;
-    [SerializeField] public float _jumpForce = 4f;
+    [SerializeField] private float _moveSpeed = 3f;
+    [SerializeField] private float _jumpForce = 4f;
+    [SerializeField] private GameObject _deathEffectPrefab;
+
+    private EnemyHealth _enemyHealth;
 
     public float MoveSpeed { get => _moveSpeed; }
     public float JumpForce { get => _jumpForce; }
@@ -18,6 +21,11 @@ public class EnemyController : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _enemyInput = GetComponent<IMoveInputSource>();
+        _enemyHealth = GetComponentInChildren<EnemyHealth>();
+        if (_enemyHealth != null)
+        {
+            _enemyHealth.OnDeath += Die; // Subscribe to the OnDeath event
+        }
     }
 
     void FixedUpdate()
@@ -45,5 +53,15 @@ public class EnemyController : MonoBehaviour
         {
             _isGrounded = false;
         }
+    }
+
+    public void Die()
+    {
+        //Hardcoding the slime's death
+        if (_deathEffectPrefab != null)
+        {
+            Instantiate(_deathEffectPrefab, transform.position, Quaternion.identity);
+        }
+        Destroy(gameObject);
     }
 }

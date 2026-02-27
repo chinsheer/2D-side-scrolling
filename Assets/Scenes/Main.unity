@@ -3012,6 +3012,7 @@ GameObject:
   - component: {fileID: 1454668984}
   - component: {fileID: 1454668983}
   - component: {fileID: 1454668985}
+  - component: {fileID: 1454668986}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -3165,6 +3166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bookUI: {fileID: 561715233}
+  combat: {fileID: 1454668986}
 --- !u!114 &1454668984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3191,6 +3193,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ebdcffbfcf50744abc6ecc12f37052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1454668986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454668978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f699a267a39ee54b8dd48ce93bdae12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerInventory: {fileID: 1674270635}
+  _aimIndicatorPrefab: {fileID: 7363598847243268172, guid: c0e3424ce06a7f349ba0d45330a8ed62, type: 3}
 --- !u!1 &1472944219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3811,6 +3827,8 @@ MonoBehaviour:
   inventorySize: 4
   slots:
   - item: {fileID: 11400000, guid: fd8bb598ce507924280f73e6e521d196, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: 5ead458120c83de4c9b79b4fe1c0a5b5, type: 2}
     quantity: 1
   inventoryType: 1
 --- !u!4 &1674270636
@@ -5283,8 +5301,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 669435341}
     m_Modifications:
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_AnchorMin.y
@@ -5292,11 +5318,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_AnchoredPosition.x

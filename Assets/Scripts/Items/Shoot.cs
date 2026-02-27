@@ -12,7 +12,7 @@ public class Shoot : UseAction
         if (projectile.TryGetComponent<IProjectile>(out var projectileComponent))
         {
             Vector2 shootDirection = context.HandPosition - (Vector2)context.User.transform.position; // Calculate direction from user to hand position
-            projectileComponent.Initialize(10, shootDirection * 5); // Example damage and speed
+            projectileComponent.Initialize(10, shootDirection * 10); // Example damage and speed
         }
     }
 }

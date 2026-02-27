@@ -7,8 +7,8 @@ public class Arrow : MonoBehaviour, IProjectile
     private int _damage;
     private Rigidbody2D _rb;
 
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called when the script instance is being loaded
+    void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
@@ -22,15 +22,20 @@ public class Arrow : MonoBehaviour, IProjectile
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, _rb.velocity);
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, _rb.velocity); // Rotate the arrow to face the direction it's moving
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.collider.TryGetComponent<IDamagable>(out var damagable))
+        if(collision.TryGetComponent<IDamagable>(out var damagable))
         {
             damagable.TakeDamage(_damage); // Adjust damage as needed
         }
         Destroy(gameObject); // Destroy the arrow on impact
+    }
+
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
     }
 }

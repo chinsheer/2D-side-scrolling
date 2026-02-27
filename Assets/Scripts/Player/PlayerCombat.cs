@@ -21,7 +21,16 @@ public class PlayerCombat : MonoBehaviour
 
     public void TryUseItem()
     {
-        // Here you could use the currently selected item in the inventory
+        var selectedSlot = _playerInventory.Slots[_playerInventory.SelectedSlotIndex];
+        if (selectedSlot.item != null && selectedSlot.item.UseAction != null)
+        {
+            UseContext context = new UseContext
+            {
+                User = gameObject,
+                HandPosition = _handPosition
+            };
+            selectedSlot.item.UseAction.Use(context);
+        }
     }
 
     public void SetHandPosition(Vector2 mousePosition)
