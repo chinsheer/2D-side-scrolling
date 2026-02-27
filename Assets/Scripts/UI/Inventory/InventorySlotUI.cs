@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -26,16 +27,21 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler
     public void SetItem(ItemData itemData, int quantity)
     {
         var itemIcon = transform.Find("Icon").GetComponent<UnityEngine.UI.Image>();
+        var quantityText = transform.Find("Quantity").GetComponent<TextMeshProUGUI>();
 
         if (itemData != null)
         {
             itemIcon.sprite = itemData.ItemIcon;
             itemIcon.enabled = true;
+            quantityText.text = quantity.ToString();
+            quantityText.enabled = true;
         }
         else
         {
             itemIcon.sprite = null;
             itemIcon.enabled = false;
+            quantityText.text = "";
+            quantityText.enabled = false;
         }
     }
 }
