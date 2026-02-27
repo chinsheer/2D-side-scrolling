@@ -28,7 +28,7 @@ public class PlayerInput : MonoBehaviour, IMoveInputSource
         }
         MoveDirection = moveDirection.normalized;
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             bookUI.ToggleVisibility();
         }

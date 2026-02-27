@@ -8,9 +8,10 @@ public class SlimeAI : MonoBehaviour, IMoveInputSource
     private Vector2 _moveDirection;
 
     public Vector2 MoveDirection { get => _moveDirection; }
-    public bool Jump { get => false; }
+    public bool Jump { get; private set; }
 
     public float DetectionRange = 5f;
+    public float AttackRange = 1f;
     public Vector2 TimeBetweenDirectionChanges = new Vector2(1f, 3f);
 
     private float _durationUntilNextDirectionChange;
@@ -29,6 +30,13 @@ public class SlimeAI : MonoBehaviour, IMoveInputSource
         if (Vector2.Distance(transform.position, _playerTransform.position) < DetectionRange)
         {
             _moveDirection = new Vector2((_playerTransform.position - transform.position).normalized.x, 0f);
+            if(Vector2.Distance(transform.position, _playerTransform.position) < AttackRange)
+            {
+                Jump = true; // This will trigger a jump in the EnemyController, which can be used for an attack animation or effect
+            } else
+            {
+                Jump = false;
+            }
         }
         else
         {
