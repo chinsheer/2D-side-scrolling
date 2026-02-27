@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class DraggableItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    public int FromSlotIndex { get; private set; }
     private RectTransform _rectTransform;
     private Canvas canvas;
     private CanvasGroup canvasGroup;
@@ -14,12 +13,22 @@ public class DraggableItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
     private Image _ghostImage;
 
+    public ItemPayload Payload;
+
     public void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
-        FromSlotIndex = GetComponentInParent<InventorySlotUI>().SlotIndex;
+    }
+
+    public void SetSource(Inventory fromInventory, int fromIndex)
+    {
+        Payload = new ItemPayload
+        {
+            fromInventory = fromInventory,
+            fromIndex = fromIndex
+        };
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -29,12 +38,11 @@ public class DraggableItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         _ghostImage.transform.SetParent(canvas.transform, false);
         _ghostImage.sprite = GetComponent<Image>().sprite;
         _ghostImage.SetNativeSize();
-        _ghostImage.raycastTarget = false; // Make the ghost image ignore raycasts
-        
+        _ghostImage.raycastTarget = false; // Make the ghost image ignore raycasts        
 
         canvasGroup.blocksRaycasts = false; // Allow raycasts to pass through the dragged item
         canvasGroup.alpha = 0.6f; // Optional: make the original item semi-transparent while dragging
-        SetDraggedPosition(eventData);   
+        SetDraggedPosition(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)

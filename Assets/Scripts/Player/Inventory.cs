@@ -1,13 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public enum InventoryType
+    {
+        Backpack,
+        Hotbar,
+        Chest
+    }
     [SerializeField] private int inventorySize = 20;
     [SerializeField] private List<InventorySlot> slots = new();
+    [SerializeField] private InventoryType inventoryType;   
 
     public List<InventorySlot> Slots => slots;
+
+    public event Action OnInventoryChanged;
+
+    public void InventoryChanged()
+    {
+        OnInventoryChanged?.Invoke();
+    }
 
     private void Awake()
     {
@@ -18,15 +33,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool AddItem(ItemData newItem, int quantity = 1)
+    public bool AddItem(ItemStack newItemStack)
     {
         // Try to stack the item first
         foreach (var slot in slots)
         {
-            if (slot.CanStack(newItem))
+            if (slot.item == newItemStack.item)
             {
-                slot.quantity += quantity;
-                return true;
+                ItemStack remaining = slot.Place(newItemStack);
+                if (remaining.IsEmpty)
+                {
+                    OnInventoryChanged?.Invoke();
+                    return true;
+                }
             }
         }
 
@@ -35,9 +54,12 @@ public class Inventory : MonoBehaviour
         {
             if (slot.IsEmpty)
             {
-                slot.item = newItem;
-                slot.quantity = quantity;
-                return true;
+                ItemStack remaining = slot.Place(newItemStack);
+                if (remaining.IsEmpty)
+                {
+                    OnInventoryChanged?.Invoke();
+                    return true;
+                }
             }
         }
 
@@ -46,46 +68,27 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    public bool RemoveItem(ItemData itemToRemove, int quantity = 1)
+    public bool RemoveItem(ItemStack itemToRemove)
     {
         foreach (var slot in slots)
         {
-            if (slot.item != null && slot.item.ID == itemToRemove.ID)
+            if (slot.item == itemToRemove.item)
             {
-                if (slot.quantity >= quantity)
+                if (slot.quantity >= itemToRemove.quantity)
                 {
-                    slot.quantity -= quantity;
+                    slot.quantity -= itemToRemove.quantity;
                     if (slot.quantity == 0)
                     {
                         slot.item = null; // Clear the slot if quantity reaches zero
                     }
+                    OnInventoryChanged?.Invoke();
                     return true;
-                }
-                else
-                {
-                    Debug.Log("Not enough items to remove!");
-                    return false;
                 }
             }
         }
 
-        Debug.Log("Item not found in inventory!");
+        Debug.Log("Item not found or insufficient quantity to remove!");
         return false;
-    }
-
-    public bool SwapItem(int fromIndex, int toIndex)
-    {
-        // For non-UI caller
-        if (fromIndex < 0 || fromIndex >= inventorySize || toIndex < 0 || toIndex >= inventorySize)
-        {
-            Debug.LogError("Invalid inventory slot index!");
-            return false;
-        }
-
-        var temp = slots[fromIndex];
-        slots[fromIndex] = slots[toIndex];
-        slots[toIndex] = temp;
-        return true;
     }
 
     public void Clear()
@@ -95,5 +98,6 @@ public class Inventory : MonoBehaviour
             slot.item = null;
             slot.quantity = 0;
         }
+        OnInventoryChanged?.Invoke();
     }
 }

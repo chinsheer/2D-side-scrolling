@@ -14,7 +14,7 @@ public class Dropzone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         if (dragged == null) return;
 
         // Hard coded to remove the item from inventory when dropped in the dropzone, can be improved by using event system or callback        
-        _inventory.RemoveItem(_inventory.Slots[dragged.FromSlotIndex].item, _inventory.Slots[dragged.FromSlotIndex].quantity);
+        _inventory.RemoveItem(_inventory.Slots[dragged.Payload.fromIndex].Stack);
         // Could create event onChange to trigger UI refresh instead of directly calling it here
         _inventoryUI.RefreshUI();
     }

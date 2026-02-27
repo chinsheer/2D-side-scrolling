@@ -11,14 +11,7 @@ public class InventoryUI : MonoBehaviour
     public void Start()
     {
         RefreshUI();
-    }
-
-    public void TryDrop(DraggableItemUI dragged, int toSlotIndex)
-    {
-        if (_inventory.SwapItem(dragged.FromSlotIndex, toSlotIndex))
-        {
-            RefreshUI();
-        }
+        _inventory.OnInventoryChanged += RefreshUI;
     }
 
     public void RefreshUI()
@@ -37,7 +30,7 @@ public class InventoryUI : MonoBehaviour
             {
                 placeHolder = Instantiate(SlotPrefab, transform).transform;
             }
-            placeHolder.GetComponent<InventorySlotUI>().SetItem(slot.item, slot.quantity);
+            placeHolder.GetComponent<InventorySlotUI>().Initialize(_inventory, i);
         }
     }
 }

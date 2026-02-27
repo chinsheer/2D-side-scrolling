@@ -6,14 +6,14 @@ using UnityEngine.EventSystems;
 
 public class InventorySlotUI : MonoBehaviour, IDropHandler
 {
-    public int SlotIndex { get; private set; }
-    public InventoryUI ParentInventoryUI { get; private set; }
+    private Inventory ownerInventory;
+    private int slotIndex;
 
-    public void Awake()
+    public void Initialize(Inventory inventory, int index)
     {
-        ParentInventoryUI = GetComponentInParent<InventoryUI>();
-        // This is UI hard coding
-        SlotIndex = transform.GetSiblingIndex();
+        ownerInventory = inventory;
+        slotIndex = index;
+        SetItem(inventory.Slots[index]);
     }
     
     public void OnDrop(PointerEventData eventData)
@@ -21,19 +21,21 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler
         var dragged = eventData.pointerDrag?.GetComponent<DraggableItemUI>();
         if (dragged == null) return;
 
-        ParentInventoryUI.TryDrop(dragged, SlotIndex);
+        Inventory fromInventory = dragged.Payload.fromInventory;
+        int fromIndex = dragged.Payload.fromIndex;
+        InventoryTransfer.Transfer(fromInventory, fromIndex, ownerInventory, slotIndex);
     }
 
-    public void SetItem(ItemData itemData, int quantity)
+    public void SetItem(InventorySlot slot)
     {
         var itemIcon = transform.Find("Icon").GetComponent<UnityEngine.UI.Image>();
         var quantityText = transform.Find("Quantity").GetComponent<TextMeshProUGUI>();
 
-        if (itemData != null)
+        if (slot.item != null)
         {
-            itemIcon.sprite = itemData.ItemIcon;
+            itemIcon.sprite = slot.item.ItemIcon;
             itemIcon.enabled = true;
-            quantityText.text = quantity.ToString();
+            quantityText.text = slot.quantity.ToString();
             quantityText.enabled = true;
         }
         else
@@ -42,6 +44,12 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler
             itemIcon.enabled = false;
             quantityText.text = "";
             quantityText.enabled = false;
+        }
+
+        var draggable = GetComponentInChildren<DraggableItemUI>();
+        if (draggable != null)
+        {
+            draggable.SetSource(ownerInventory, slotIndex);
         }
     }
 }

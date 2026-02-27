@@ -16,13 +16,14 @@ public class InventoryManipulate : EventAction
 
     public override void Execute(EventContext context)
     {
+        ItemStack itemStack = new ItemStack { item = Item, quantity = Quantity };
         switch (Type)
         {
             case ManipulateType.AddItem:
-                context.PlayerInventory.AddItem(Item, Quantity);
+                context.PlayerInventory.AddItem(itemStack);
                 break;
             case ManipulateType.RemoveItem:
-                context.PlayerInventory.RemoveItem(Item, Quantity);
+                context.PlayerInventory.RemoveItem(itemStack);
                 break;
             case ManipulateType.ClearInventory:
                 context.PlayerInventory.Clear();
