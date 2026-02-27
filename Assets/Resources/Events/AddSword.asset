@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: AddSword
   m_EditorClassIdentifier: 
   Type: 0
-  Item: {fileID: 0}
-  Quantity: 0
+  Item: {fileID: 11400000, guid: fd8bb598ce507924280f73e6e521d196, type: 2}
+  Quantity: 1
+  InventoryType: 1
