@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653b0e63f9184fc4fa0734de472bbe14, type: 3}
   m_Name: MorningEvent
   m_EditorClassIdentifier: 
-  HopType: 0
+  HopType: 1
   Day: 0
   TimeOfDay: 0
   Hour: 0

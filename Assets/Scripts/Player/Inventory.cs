@@ -17,12 +17,32 @@ public class Inventory : MonoBehaviour
 
     public List<InventorySlot> Slots => slots;
     public InventoryType Type => inventoryType;
+    public int SelectedSlotIndex { get; set; } = 0;
 
     public event Action OnInventoryChanged;
+    public event Action<int> OnSelectedSlotChanged;
 
     public void InventoryChanged()
     {
         OnInventoryChanged?.Invoke();
+    }
+
+    public void SetSelectedSlot(int index)
+    {
+        if (index >= 0 && index < slots.Count)
+        {
+            SelectedSlotIndex = index;
+            OnSelectedSlotChanged?.Invoke(index);
+        }
+    }
+
+    public ItemStack GetSelectedItem()
+    {
+        if (SelectedSlotIndex >= 0 && SelectedSlotIndex < slots.Count)
+        {
+            return slots[SelectedSlotIndex].Stack;
+        }
+        return new ItemStack{item = null, quantity = 0};
     }
 
     private void Awake()
@@ -32,6 +52,7 @@ public class Inventory : MonoBehaviour
         {
             slots.Add(new InventorySlot());
         }
+        SetSelectedSlot(0);
     }
 
     public bool AddItem(ItemStack newItemStack)

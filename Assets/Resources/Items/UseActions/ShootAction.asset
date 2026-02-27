@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 653b0e63f9184fc4fa0734de472bbe14, type: 3}
-  m_Name: EveningEvent
+  m_Script: {fileID: 11500000, guid: 999fff0f54feda642b78524592eacbc9, type: 3}
+  m_Name: ShootAction
   m_EditorClassIdentifier: 
-  HopType: 1
-  Day: 0
-  TimeOfDay: 2
-  Hour: 0
-  WeekDay: 0
+  ProjectilePrefab: {fileID: 6968315087781761293, guid: 8651dc1e625a28c479254c4943730d24, type: 3}
