@@ -10,7 +10,10 @@ public class OnCollide : MonoBehaviour
     {
         foreach (var act in actions)
         {
-            act.Execute();
+            if (collision.gameObject.TryGetComponent<EventContextProvider>(out var contextProvider))
+            {
+                act.Execute(contextProvider.GetContext());
+            }
         }
     }
 }

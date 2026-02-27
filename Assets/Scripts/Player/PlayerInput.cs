@@ -5,6 +5,8 @@ public class PlayerInput : MonoBehaviour, IMoveInputSource
     public Vector2 MoveDirection { get; private set; }
     public bool Jump { get; private set; }
 
+    public BookUI bookUI; // Assign in inspector
+
     void Update()
     {
         Vector2 moveDirection = Vector2.zero;
@@ -25,5 +27,10 @@ public class PlayerInput : MonoBehaviour, IMoveInputSource
             Jump = false;
         }
         MoveDirection = moveDirection.normalized;
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            bookUI.ToggleVisibility();
+        }
     }
 }
