@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Crystal
   m_EditorClassIdentifier: 
   ID: 0
-  ItemName: 
-  ItemType: 0
-  ItemIcon: {fileID: 0}
-  IsStackable: 0
+  ItemName: Crystal
+  ItemType: 2
+  ItemIcon: {fileID: 112794039, guid: 49484cde4fff1f24096ee6ed22d58f76, type: 3}
+  IsStackable: 1

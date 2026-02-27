@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   ID: 1
-  ItemName: 
-  ItemType: 0
-  ItemIcon: {fileID: 0}
+  ItemName: Sword
+  ItemType: 1
+  ItemIcon: {fileID: 1036700982, guid: 49484cde4fff1f24096ee6ed22d58f76, type: 3}
   IsStackable: 0
