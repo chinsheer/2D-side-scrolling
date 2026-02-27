@@ -6,6 +6,7 @@ public class PlayerInput : MonoBehaviour, IMoveInputSource
     public bool Jump { get; private set; }
 
     public BookUI bookUI; // Assign in inspector
+    public PlayerCombat combat; // Assign in inspector
 
     void Update()
     {
@@ -32,5 +33,17 @@ public class PlayerInput : MonoBehaviour, IMoveInputSource
         {
             bookUI.ToggleVisibility();
         }
+
+        if (Input.GetMouseButtonDown(1)) // Right click
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            combat.StartAiming(mousePosition);
+        }
+        else if (Input.GetMouseButtonUp(1)) // Release right click
+        {
+            combat.StopAiming();
+        }
+
+        combat.SetHandPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Update hand position for aiming indicator
     }
 }
