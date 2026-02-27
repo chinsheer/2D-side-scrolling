@@ -87,4 +87,13 @@ public class Inventory : MonoBehaviour
         slots[toIndex] = temp;
         return true;
     }
+
+    public void Clear()
+    {
+        foreach (var slot in slots)
+        {
+            slot.item = null;
+            slot.quantity = 0;
+        }
+    }
 }

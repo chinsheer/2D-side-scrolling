@@ -19,7 +19,7 @@ public class TimeHopper : EventAction
     public float Hour;
     public WorldTime.WeekDay WeekDay;
 
-    public override void Execute()
+    public override void Execute(EventContext context)
     {
         switch (HopType)
         {
