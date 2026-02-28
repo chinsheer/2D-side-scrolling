@@ -5,12 +5,12 @@ public class InventoryUIController : MonoBehaviour, IUIPageController
     private InventoryUI _inventoryUI;
     private ItemDescriptionUI _itemDescription;
 
-    void Awake()
+    void Start()
     {
         _inventoryUI = GetComponentInChildren<InventoryUI>();
         _itemDescription = GetComponentInChildren<ItemDescriptionUI>();
-        _inventoryUI.Start();
         _inventoryUI.OnSlotClicked += UpdateSelectedItemDescription;
+        _inventoryUI.Initialize(_inventory);
         _itemDescription.RefreshUI();
     }
 

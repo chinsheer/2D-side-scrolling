@@ -18,6 +18,7 @@ public class Inventory : MonoBehaviour
     public List<InventorySlot> Slots => slots;
     public InventoryType Type => inventoryType;
     public int SelectedSlotIndex { get; set; } = 0;
+    public int Capacity => inventorySize;
 
     public event Action OnInventoryChanged;
     public event Action<int> OnSelectedSlotChanged;

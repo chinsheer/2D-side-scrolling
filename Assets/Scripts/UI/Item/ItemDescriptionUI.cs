@@ -10,15 +10,11 @@ public class ItemDescriptionUI : MonoBehaviour
     private TMPro.TextMeshProUGUI _itemNameText;
     private TMPro.TextMeshProUGUI _itemDescriptionText;
 
-    private void Awake()
+    public void Awake()
     {
         _itemIconImage = transform.Find("ItemData/Frame/Icon").GetComponent<UnityEngine.UI.Image>();
         _itemNameText = transform.Find("ItemData/Data/ItemName").GetComponent<TMPro.TextMeshProUGUI>();
         _itemDescriptionText = transform.Find("ItemDescription/Description").GetComponent<TMPro.TextMeshProUGUI>();
-
-        _itemIconImage.enabled = false;
-        _itemNameText.enabled = false;
-        _itemDescriptionText.enabled = false;
     }
 
     public void RefreshUI()
@@ -28,9 +24,12 @@ public class ItemDescriptionUI : MonoBehaviour
         _itemIconImage.sprite = ItemData.ItemIcon;
         _itemNameText.text = ItemData.ItemName;
         _itemDescriptionText.text = ItemData.ItemDescription;
+    }
 
-        _itemIconImage.enabled = true;
-        _itemNameText.enabled = true;
-        _itemDescriptionText.enabled = true;
+    public void OnEnable()
+    {
+        _itemIconImage = transform.Find("ItemData/Frame/Icon").GetComponent<UnityEngine.UI.Image>();
+        _itemNameText = transform.Find("ItemData/Data/ItemName").GetComponent<TMPro.TextMeshProUGUI>();
+        _itemDescriptionText = transform.Find("ItemDescription/Description").GetComponent<TMPro.TextMeshProUGUI>();      
     }
 }

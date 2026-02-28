@@ -13,7 +13,7 @@ public class HandCraftingUIController : MonoBehaviour, IUIPageController
     private ICraftingProvider _craftingProvider;
     private ItemDescriptionUI _itemDescription;
 
-    void Awake()
+    void Start()
     {
         _craftingProvider = GetComponentInParent<ICraftingProvider>();
         _craftList = GetComponentInChildren<CraftListUI>();
