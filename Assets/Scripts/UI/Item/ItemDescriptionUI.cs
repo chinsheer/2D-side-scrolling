@@ -6,16 +6,9 @@ public class ItemDescriptionUI : MonoBehaviour
 {
     public ItemData ItemData { get; set; }
     
-    private UnityEngine.UI.Image _itemIconImage;
-    private TMPro.TextMeshProUGUI _itemNameText;
-    private TMPro.TextMeshProUGUI _itemDescriptionText;
-
-    public void Awake()
-    {
-        _itemIconImage = transform.Find("ItemData/Frame/Icon").GetComponent<UnityEngine.UI.Image>();
-        _itemNameText = transform.Find("ItemData/Data/ItemName").GetComponent<TMPro.TextMeshProUGUI>();
-        _itemDescriptionText = transform.Find("ItemDescription/Description").GetComponent<TMPro.TextMeshProUGUI>();
-    }
+    [SerializeField] private UnityEngine.UI.Image _itemIconImage;
+    [SerializeField] private TMPro.TextMeshProUGUI _itemNameText;
+    [SerializeField] private TMPro.TextMeshProUGUI _itemDescriptionText;
 
     public void RefreshUI()
     {

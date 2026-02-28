@@ -22,13 +22,22 @@ public class CraftListUI : MonoBehaviour
     public void RefreshUI()
     {
         var recipes = _craftingProvider.AvailableRecipes;
-        for (int i = 0; i < recipes.Count; i++)
+        for (int i = 0; i < Mathf.Max(recipes.Count, transform.childCount); i++)
         {
             Transform placeHolder;
+
+            if(i >= recipes.Count)
+            {
+                // If there are more UI elements than recipes, disable the extra ones
+                placeHolder = transform.GetChild(i);
+                placeHolder.gameObject.SetActive(false);
+                continue;
+            }
 
             if (i < transform.childCount)
             {
                 placeHolder = transform.GetChild(i);
+                placeHolder.gameObject.SetActive(true);
             }
             else
             {

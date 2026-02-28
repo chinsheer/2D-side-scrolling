@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandCraftStation : MonoBehaviour, ICraftingProvider
+public class TableCraftStation : MonoBehaviour, ICraftingProvider
 {
     [SerializeField] private List<RecipeData> _recipes;
 
@@ -28,6 +27,16 @@ public class HandCraftStation : MonoBehaviour, ICraftingProvider
             CraftingCore.ConsumeIngredients(recipe, targetInventory);
             CraftingCore.ReturnItem(recipe, targetInventory);
         }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        collision.GetComponentInChildren<CraftingUIController>(true)?.Bind(this);
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        collision.GetComponentInChildren<CraftingUIController>(true)?.Unbind(this);
     }
 
 }

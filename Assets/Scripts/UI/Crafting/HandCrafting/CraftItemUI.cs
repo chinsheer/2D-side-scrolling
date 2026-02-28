@@ -31,7 +31,7 @@ public class CraftItemUI : MonoBehaviour
 
         itemIconImage.sprite = _recipeData.ResultItem.item.ItemIcon;
         nameText.text = _recipeData.ResultItem.item.ItemName;
-        quantityText.text = data.CraftableQuantity.ToString();
+        quantityText.text = "x" + data.CraftableQuantity.ToString();
         backgroundImage.sprite = data.IsSelected ? SelectedBackground : NormalBackground;
         button.onClick.AddListener(() => OnSelected?.Invoke(Index));
 

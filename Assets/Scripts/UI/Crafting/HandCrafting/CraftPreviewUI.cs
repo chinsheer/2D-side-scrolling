@@ -16,13 +16,22 @@ public class CraftPreviewUI : MonoBehaviour
 
     public void RefreshUI()
     {
-        for (int i = 0; i < SelectedRecipe.Ingredients.GetLength(0); i++)
+        for (int i = 0; i < Mathf.Max(SelectedRecipe.Ingredients.GetLength(0), transform.childCount); i++)
         {
             Transform placeHolder;
+
+            if(i >= SelectedRecipe.Ingredients.GetLength(0))
+            {
+                // If there are more UI elements than ingredients, disable the extra ones
+                placeHolder = transform.GetChild(i);
+                placeHolder.gameObject.SetActive(false);
+                continue;
+            }
 
             if (i < transform.childCount)
             {
                 placeHolder = transform.GetChild(i);
+                placeHolder.gameObject.SetActive(true);
             }
             else
             {
