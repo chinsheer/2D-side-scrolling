@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,11 +8,15 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler
     private Inventory ownerInventory;
     private int slotIndex;
 
+    public event Action<int> OnSlotClicked; // Event for slot click, passing the slot index
+
     public void Initialize(Inventory inventory, int index)
     {
         ownerInventory = inventory;
         slotIndex = index;
         SetItem(inventory.Slots[index]);
+        var button = GetComponent<UnityEngine.UI.Button>();
+        button.onClick.AddListener(() => OnSlotClicked?.Invoke(slotIndex)); // Invoke event on click
     }
     
     public void OnDrop(PointerEventData eventData)

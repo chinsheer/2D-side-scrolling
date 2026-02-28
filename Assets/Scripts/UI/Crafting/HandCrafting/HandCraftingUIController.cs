@@ -11,14 +11,14 @@ public class HandCraftingUIController : MonoBehaviour, IUIPageController
     private CraftListUI _craftList;
     private CraftPreviewUI _craftPreviewUI;
     private ICraftingProvider _craftingProvider;
-    private ItemDescription _itemDescription;
+    private ItemDescriptionUI _itemDescription;
 
     void Awake()
     {
         _craftingProvider = GetComponentInParent<ICraftingProvider>();
         _craftList = GetComponentInChildren<CraftListUI>();
         _craftPreviewUI = GetComponentInChildren<CraftPreviewUI>();
-        _itemDescription = GetComponentInChildren<ItemDescription>();
+        _itemDescription = GetComponentInChildren<ItemDescriptionUI>();
         _craftList.Initialize(_craftingProvider, _inventory);
         _craftPreviewUI.Initialize(_inventory);
         _craftPreviewUI.SelectedRecipe = _craftingProvider.AvailableRecipes[0];

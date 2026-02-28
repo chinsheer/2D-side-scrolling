@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDescription : MonoBehaviour
+public class ItemDescriptionUI : MonoBehaviour
 {
     public ItemData ItemData { get; set; }
     
@@ -23,13 +23,7 @@ public class ItemDescription : MonoBehaviour
 
     public void RefreshUI()
     {
-        if (ItemData == null)
-        {
-            _itemIconImage.enabled = false;
-            _itemNameText.enabled = false;
-            _itemDescriptionText.enabled = false;
-            return;
-        }
+        if (ItemData == null) return;
 
         _itemIconImage.sprite = ItemData.ItemIcon;
         _itemNameText.text = ItemData.ItemName;

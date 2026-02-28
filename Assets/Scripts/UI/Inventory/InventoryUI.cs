@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
@@ -8,13 +6,14 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Inventory _inventory;
     public GameObject SlotPrefab;
 
+    public event Action<ItemData> OnSlotClicked; // Event for slot click, passing the item data
+
     private int selectedSlotIndex = 0;
 
     public void Start()
     {
         RefreshUI();
         _inventory.OnInventoryChanged += RefreshUI;
-        _inventory.OnSelectedSlotChanged += RefreshSelectedSlot;
     }
 
     public void RefreshUI()
@@ -35,7 +34,8 @@ public class InventoryUI : MonoBehaviour
             }
             var slotUI = placeHolder.GetComponent<InventorySlotUI>();
             slotUI.Initialize(_inventory, i);
-            slotUI.SetSelected(i == _inventory.SelectedSlotIndex);
+            slotUI.SetSelected(i == selectedSlotIndex);
+            slotUI.OnSlotClicked += RefreshSelectedSlot; // Subscribe to slot click event
         }
     }
 
@@ -45,5 +45,6 @@ public class InventoryUI : MonoBehaviour
         transform.GetChild(selectedSlotIndex).GetComponent<InventorySlotUI>().SetSelected(false); // Deselect previous
         transform.GetChild(selectIndex).GetComponent<InventorySlotUI>().SetSelected(true); // Select new
         selectedSlotIndex = selectIndex;
+        OnSlotClicked?.Invoke(_inventory.Slots[selectIndex].item); // Invoke event with item data of selected slot
     }
 }
