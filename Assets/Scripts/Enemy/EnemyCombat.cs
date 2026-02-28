@@ -10,7 +10,7 @@ public class EnemyCombat : MonoBehaviour
         IDamagable damagable = collision.GetComponent<IDamagable>();
         if (damagable != null)
         {
-            damagable.TakeDamage(damage); // Example damage value, can be adjusted or made dynamic
+            damagable.TakeDamage(new DamageAttribute { DamageAmount = damage }); // Example damage value, can be adjusted or made dynamic
         }
     }
 }

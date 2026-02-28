@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, IDamagable
 {
     [SerializeField] private int maxHealth = 100;
-    private int currentHealth;
+    private float currentHealth;
 
     public event Action OnHealthChanged;
 
@@ -15,11 +15,11 @@ public class PlayerHealth : MonoBehaviour, IDamagable
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(DamageAttribute damage)
     {
-        currentHealth -= damage;
+        currentHealth -= damage.DamageAmount;
         OnHealthChanged?.Invoke();
-        Debug.Log($"Player took {damage} damage, current health: {currentHealth}");
+        Debug.Log($"Player took {damage.DamageAmount} damage, current health: {currentHealth}");
         if (currentHealth <= 0)
         {
             Die();

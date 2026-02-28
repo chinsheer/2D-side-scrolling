@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IDamagable
 {
-    public int maxHealth = 20;
-    private int currentHealth;
+    public float maxHealth = 20;
+    private float currentHealth;
 
     public event Action OnDeath; // Event to notify when the enemy dies
 
@@ -15,9 +15,9 @@ public class EnemyHealth : MonoBehaviour, IDamagable
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(DamageAttribute damageAttribute)
     {
-        currentHealth -= damage;
+        currentHealth -= damageAttribute.DamageAmount;
         if (currentHealth <= 0)
         {
             Die();
