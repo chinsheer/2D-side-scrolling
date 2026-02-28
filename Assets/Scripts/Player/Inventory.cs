@@ -21,20 +21,10 @@ public class Inventory : MonoBehaviour
     public int Capacity => inventorySize;
 
     public event Action OnInventoryChanged;
-    public event Action<int> OnSelectedSlotChanged;
 
     public void InventoryChanged()
     {
         OnInventoryChanged?.Invoke();
-    }
-
-    public void SetSelectedSlot(int index)
-    {
-        if (index >= 0 && index < slots.Count)
-        {
-            SelectedSlotIndex = index;
-            OnSelectedSlotChanged?.Invoke(index);
-        }
     }
 
     public ItemStack GetSelectedItem()
@@ -53,7 +43,6 @@ public class Inventory : MonoBehaviour
         {
             slots.Add(new InventorySlot());
         }
-        SetSelectedSlot(0);
     }
 
     public bool AddItem(ItemStack newItemStack)

@@ -2,15 +2,16 @@ using UnityEngine;
 public class InventoryUIController : MonoBehaviour, IUIPageController
 {
     [SerializeField] private Inventory _inventory;
-    private InventoryUI _inventoryUI;
-    private ItemDescriptionUI _itemDescription;
+    [SerializeField] private Inventory _hotbarInventory;
+    [SerializeField] private InventoryUI _inventoryUI;
+    [SerializeField] private InventoryUI _hotbarInventoryUI;
+    [SerializeField] private ItemDescriptionUI _itemDescription;
 
     void Start()
     {
-        _inventoryUI = GetComponentInChildren<InventoryUI>();
-        _itemDescription = GetComponentInChildren<ItemDescriptionUI>();
         _inventoryUI.OnSlotClicked += UpdateSelectedItemDescription;
         _inventoryUI.Initialize(_inventory);
+        _hotbarInventoryUI.Initialize(_hotbarInventory);
         _itemDescription.RefreshUI();
     }
 
