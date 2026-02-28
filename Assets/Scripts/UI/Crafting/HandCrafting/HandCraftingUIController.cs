@@ -32,4 +32,11 @@ public class HandCraftingUIController : MonoBehaviour
         _craftPreviewUI.SelectedRecipe = recipes[selectedRecipeIndex];
         _craftPreviewUI.RefreshUI();
     }
+
+    public void RequestCraft()
+    {
+        _craftingProvider.Craft(_craftPreviewUI.SelectedRecipe);
+        _craftList.RefreshUI();
+        _craftPreviewUI.RefreshUI();
+    }
 }

@@ -7,8 +7,6 @@ public class HandCraftStation : MonoBehaviour, ICraftingProvider
     [SerializeField] private List<RecipeData> _recipes;
     [SerializeField] private Inventory _playerInventory;
 
-    private RecipeData _currentRecipe;
-
     public List<RecipeData> AvailableRecipes => _recipes;
 
     public List<RecipeData> GetCraftableRecipes()
@@ -24,34 +22,13 @@ public class HandCraftStation : MonoBehaviour, ICraftingProvider
         return craftableRecipes;
     }
 
-    public void Craft()
+    public void Craft(RecipeData recipe)
     {
-        if (_currentRecipe == null)
+        if (CraftingCore.CanCraft(recipe, _playerInventory))
         {
-            Debug.Log("No recipe selected!");
-            return;
+            CraftingCore.ConsumeIngredients(recipe, _playerInventory);
+            CraftingCore.ReturnItem(recipe, _playerInventory);
         }
-
-        if (!CraftingCore.CanCraft(_currentRecipe, _playerInventory))
-        {
-            Debug.Log("Not enough ingredients!");
-            return;
-        }
-
-        // Remove ingredients from inventory
-        if (!CraftingCore.ConsumeIngredients(_currentRecipe, _playerInventory))
-        {
-            Debug.LogError("Failed to consume ingredients!");
-            return;
-        }
-
-        // Add crafted item to inventory
-        if (!CraftingCore.ReturnItem(_currentRecipe, _playerInventory))
-        {
-            Debug.LogError("Failed to return crafted item!");
-            return;
-        }
-        Debug.Log("Crafted: " + _currentRecipe.ResultItem.item.name);
     }
 
 }
