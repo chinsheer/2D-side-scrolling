@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // This class controlling hand crafting UI lifecycle and interactions
-public class HandCraftingUIController : MonoBehaviour
+public class HandCraftingUIController : MonoBehaviour, IUIPageController
 {
     [SerializeField] private Inventory _inventory;
 
@@ -44,5 +45,20 @@ public class HandCraftingUIController : MonoBehaviour
         _craftingProvider.Craft(_craftPreviewUI.SelectedRecipe);
         _craftList.RefreshUI();
         _craftPreviewUI.RefreshUI();
+    }
+
+    public void Open()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Close()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void RefreshUI()
+    {
+        UpdatePreview(0);
     }
 }
