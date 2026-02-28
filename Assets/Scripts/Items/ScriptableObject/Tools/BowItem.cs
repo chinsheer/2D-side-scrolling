@@ -12,7 +12,7 @@ public class BowItem : ItemData, IUsableItem, IDamageableItem, IAimableItem
         _type = ItemType.Tools; // Set the item type to Tools for weapons
     }
 
-    public void Use(UseContext context)
+    public UseResult Use(UseContext context)
     {
         // Instantiate the projectile
         GameObject projectile = Instantiate(ProjectilePrefab, context.HandPosition, Quaternion.identity);
@@ -26,6 +26,8 @@ public class BowItem : ItemData, IUsableItem, IDamageableItem, IAimableItem
         {
             damageComponent.ConfigureDamage(Damage);
         }
+        
+        return new UseResult { Success = true, consumedQuantity = 0 };
     }
 
     public DamageAttribute GetDamage()

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IUsableItem
 {
-    void Use(UseContext context);
+    UseResult Use(UseContext context);
 }
 
 public struct UseContext
@@ -12,4 +12,10 @@ public struct UseContext
     public Inventory inventory;
 
     public ItemData ItemData;
+}
+
+public struct UseResult
+{
+    public bool Success;
+    public int consumedQuantity;
 }

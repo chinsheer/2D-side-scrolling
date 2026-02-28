@@ -2380,6 +2380,8 @@ MonoBehaviour:
     quantity: 3
   - item: {fileID: 11400000, guid: e794bff1a3d208742ac09915369c3cae, type: 2}
     quantity: 10
+  - item: {fileID: 11400000, guid: 65d152ad427877a41a668939e5b126f9, type: 2}
+    quantity: 10
   inventoryType: 0
 --- !u!4 &651015299
 Transform:
@@ -6047,6 +6049,10 @@ MonoBehaviour:
   inventorySize: 4
   slots:
   - item: {fileID: 11400000, guid: 3b5530d2ed56eda45afbbe3a40b0dd1f, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: 8aca5fca3bc9dc34e8d32669ed9ec9ab, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: 55b841fff006d6843a499917942a5f4a, type: 2}
     quantity: 1
   inventoryType: 1
 --- !u!4 &1674270636

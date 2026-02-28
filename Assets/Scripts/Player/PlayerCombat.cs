@@ -22,7 +22,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void TryUseItem()
     {
-        var selectedSlot = _hotbarInventory.Slots[_hotbarInventory.SelectedSlotIndex];
+        var selectedSlot = _hotbarInventory.Slots[_hotbarInventoryUI.SelectedSlotIndex];
         if (selectedSlot.item != null)
         {
 
@@ -37,13 +37,19 @@ public class PlayerCombat : MonoBehaviour
 
             else if (selectedSlot.item is IUsableItem usableItem)
             {
-                usableItem.Use(new UseContext
+                UseResult result = usableItem.Use(new UseContext
                 {
                     User = gameObject,
                     HandPosition = _handPosition,
                     inventory = _hotbarInventory,
                     ItemData = selectedSlot.item
                 });
+
+                if (result.Success)
+                {
+                    selectedSlot.quantity -= result.consumedQuantity; // Reduce the quantity based on the use result
+                    _hotbarInventoryUI.RefreshUI(); // Calling RefreshUI in combat is not practical
+                }
             }
         }
     }
@@ -55,7 +61,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void StartAiming(Vector2 mousePosition)
     {
-        var selectedSlot = _hotbarInventory.Slots[_hotbarInventory.SelectedSlotIndex];
+        var selectedSlot = _hotbarInventory.Slots[_hotbarInventoryUI.SelectedSlotIndex];
         if (selectedSlot.item is IAimableItem)
         {
             _currentAimIndicator = Instantiate(_aimIndicatorPrefab, _handPosition, Quaternion.identity); // Show the aiming indicator at the hand position

@@ -12,7 +12,7 @@ public class SwordItem : ItemData, IUsableItem, IDamageableItem
         _type = ItemType.Tools; // Set the item type to Tools for weapons
     }
 
-    public void Use(UseContext context)
+    public UseResult Use(UseContext context)
     {
         Vector3 SpawnPosition = context.User.transform.position + new Vector3(0.2f, 0.2f, 0);
         GameObject swingEffect = Instantiate(SwingEffectPrefab, SpawnPosition, Quaternion.identity);
@@ -25,6 +25,8 @@ public class SwordItem : ItemData, IUsableItem, IDamageableItem
         {
             damageComponent.ConfigureDamage(Damage);
         }
+
+        return new UseResult { Success = true, consumedQuantity = 0 };
     }
 
     public DamageAttribute GetDamage()
