@@ -32,6 +32,7 @@ public class PlayerCombat : MonoBehaviour
                 GameObject prefabToPlace = placeableItem.GetPlaceablePrefab();
                 Instantiate(prefabToPlace, _handPosition, Quaternion.identity);
                 selectedSlot.quantity -= 1;
+                _hotbarInventoryUI.RefreshUI();
 
             }
 
