@@ -19,3 +19,4 @@ MonoBehaviour:
   IsStackable: 1
   MaxStackSize: 32
   UseAction: {fileID: 0}
+  ItemDescription: Can contain items up to 40 type

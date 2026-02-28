@@ -10,17 +10,21 @@ public class HandCraftingUIController : MonoBehaviour
     private CraftListUI _craftList;
     private CraftPreviewUI _craftPreviewUI;
     private ICraftingProvider _craftingProvider;
+    private ItemDescription _itemDescription;
 
     void Awake()
     {
         _craftingProvider = GetComponentInParent<ICraftingProvider>();
         _craftList = GetComponentInChildren<CraftListUI>();
         _craftPreviewUI = GetComponentInChildren<CraftPreviewUI>();
+        _itemDescription = GetComponentInChildren<ItemDescription>();
         _craftList.Initialize(_craftingProvider, _inventory);
         _craftPreviewUI.Initialize(_inventory);
         _craftPreviewUI.SelectedRecipe = _craftingProvider.AvailableRecipes[0];
+        _itemDescription.ItemData = _craftingProvider.AvailableRecipes[0].ResultItem.item;
         _craftList.RefreshUI();
         _craftPreviewUI.RefreshUI();
+        _itemDescription.RefreshUI();
         _craftList.OnChangeSelectedRecipe += UpdatePreview;
     }
 
@@ -31,6 +35,8 @@ public class HandCraftingUIController : MonoBehaviour
 
         _craftPreviewUI.SelectedRecipe = recipes[selectedRecipeIndex];
         _craftPreviewUI.RefreshUI();
+        _itemDescription.ItemData = recipes[selectedRecipeIndex].ResultItem.item;
+        _itemDescription.RefreshUI();
     }
 
     public void RequestCraft()
