@@ -122,4 +122,18 @@ public class Inventory : MonoBehaviour
         }
         OnInventoryChanged?.Invoke();
     }
+
+    // Inventory interface
+    public int GetItemQuantity(ItemData item) 
+    {
+        int totalQuantity = 0;
+        foreach (var slot in slots)
+        {
+            if (slot.item == item)
+            {
+                totalQuantity += slot.quantity;
+            }
+        }
+        return totalQuantity;
+    }
 }
