@@ -5,9 +5,14 @@ using UnityEngine.EventSystems;
 
 public class Dropzone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    // This should not directly reference inventory
-    [SerializeField] private Inventory _inventory;
     [SerializeField] private InventoryUI _inventoryUI;
+    private Inventory _inventory;
+
+    public void Initialize(InventoryUI inventoryUI)
+    {
+        _inventoryUI = inventoryUI;
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
         var dragged = eventData.pointerDrag?.GetComponent<DraggableItemUI>();

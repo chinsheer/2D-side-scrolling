@@ -12,4 +12,5 @@ public class ItemData : ScriptableObject
     public bool IsStackable;
     public int MaxStackSize;
     public UseAction UseAction;
+    public string ItemDescription;
 }

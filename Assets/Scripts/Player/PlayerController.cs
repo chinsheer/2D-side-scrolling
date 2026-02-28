@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private IMoveInputSource _playerInput;
 
     private bool _isGrounded = false;
-
+    
     [SerializeField] public float _moveSpeed = 5f;
     [SerializeField] public float _jumpForce = 5f;
 

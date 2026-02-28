@@ -5,7 +5,8 @@ using UnityEngine.Rendering;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] private Inventory _playerInventory; // Reference to the player's inventory
+    [SerializeField] private InventoryUI _hotbarInventoryUI; // Reference to the player's inventory UI
+    [SerializeField] private Inventory _hotbarInventory; // Reference to the player's inventory data
     [SerializeField] private GameObject _aimIndicatorPrefab; // Prefab for the aiming indicator
 
     private Vector2 _handPosition;
@@ -21,7 +22,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void TryUseItem()
     {
-        var selectedSlot = _playerInventory.Slots[_playerInventory.SelectedSlotIndex];
+        var selectedSlot = _hotbarInventory.Slots[_hotbarInventory.SelectedSlotIndex];
         if (selectedSlot.item != null && selectedSlot.item.UseAction != null)
         {
             UseContext context = new UseContext
@@ -54,6 +55,6 @@ public class PlayerCombat : MonoBehaviour
 
     public void SetSelectedSlot(int index)
     {
-        _playerInventory.SetSelectedSlot(index);
+        _hotbarInventoryUI.RefreshSelectedSlot(index);
     }
 }

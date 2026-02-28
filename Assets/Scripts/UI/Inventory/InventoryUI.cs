@@ -1,25 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] private Inventory _inventory;
+    private Inventory _inventory;
     public GameObject SlotPrefab;
 
-    private int selectedSlotIndex = 0;
+    public event Action<ItemData> OnSlotClicked; // Event for slot click, passing the item data
 
-    public void Start()
+    private int _selectedSlotIndex = 0;
+    public int SelectedSlotIndex => _selectedSlotIndex;
+
+    public void Initialize(Inventory inventory)
     {
-        RefreshUI();
+        _inventory = inventory;
         _inventory.OnInventoryChanged += RefreshUI;
-        _inventory.OnSelectedSlotChanged += RefreshSelectedSlot;
+        RefreshUI();
+        RefreshSelectedSlot(_selectedSlotIndex); // Highlight the initially selected slot
     }
 
     public void RefreshUI()
     {
-        for (int i = 0; i < _inventory.Slots.Count; i++)
+        for (int i = 0; i < _inventory.Capacity; i++)
         {
             var slot = _inventory.Slots[i];
 
@@ -35,15 +37,17 @@ public class InventoryUI : MonoBehaviour
             }
             var slotUI = placeHolder.GetComponent<InventorySlotUI>();
             slotUI.Initialize(_inventory, i);
-            slotUI.SetSelected(i == _inventory.SelectedSlotIndex);
+            slotUI.SetSelected(i == _selectedSlotIndex);
+            slotUI.OnSlotClicked += RefreshSelectedSlot; // Subscribe to slot click event
         }
     }
 
     // Refresh only the selected slot highlight
     public void RefreshSelectedSlot(int selectIndex)
     {
-        transform.GetChild(selectedSlotIndex).GetComponent<InventorySlotUI>().SetSelected(false); // Deselect previous
+        transform.GetChild(_selectedSlotIndex).GetComponent<InventorySlotUI>().SetSelected(false); // Deselect previous
         transform.GetChild(selectIndex).GetComponent<InventorySlotUI>().SetSelected(true); // Select new
-        selectedSlotIndex = selectIndex;
+        _selectedSlotIndex = selectIndex;
+        OnSlotClicked?.Invoke(_inventory.Slots[selectIndex].item); // Invoke event with item data of selected slot
     }
 }

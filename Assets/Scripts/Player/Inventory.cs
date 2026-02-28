@@ -18,22 +18,13 @@ public class Inventory : MonoBehaviour
     public List<InventorySlot> Slots => slots;
     public InventoryType Type => inventoryType;
     public int SelectedSlotIndex { get; set; } = 0;
+    public int Capacity => inventorySize;
 
     public event Action OnInventoryChanged;
-    public event Action<int> OnSelectedSlotChanged;
 
     public void InventoryChanged()
     {
         OnInventoryChanged?.Invoke();
-    }
-
-    public void SetSelectedSlot(int index)
-    {
-        if (index >= 0 && index < slots.Count)
-        {
-            SelectedSlotIndex = index;
-            OnSelectedSlotChanged?.Invoke(index);
-        }
     }
 
     public ItemStack GetSelectedItem()
@@ -52,7 +43,6 @@ public class Inventory : MonoBehaviour
         {
             slots.Add(new InventorySlot());
         }
-        SetSelectedSlot(0);
     }
 
     public bool AddItem(ItemStack newItemStack)
@@ -121,5 +111,19 @@ public class Inventory : MonoBehaviour
             slot.quantity = 0;
         }
         OnInventoryChanged?.Invoke();
+    }
+
+    // Inventory interface
+    public int GetItemQuantity(ItemData item) 
+    {
+        int totalQuantity = 0;
+        foreach (var slot in slots)
+        {
+            if (slot.item == item)
+            {
+                totalQuantity += slot.quantity;
+            }
+        }
+        return totalQuantity;
     }
 }
