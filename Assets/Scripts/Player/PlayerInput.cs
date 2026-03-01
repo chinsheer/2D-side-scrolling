@@ -19,7 +19,7 @@ public class PlayerInput : MonoBehaviour, IMoveInputSource
         {
             moveDirection += Vector2.right;
         }
-        if(Input.GetKey(KeyCode.Space))
+        if(Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))
         {
             Jump = true;
         }

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public enum ItemType { Resources, Tools, Objects, Seeds }
 
-[CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
 public class ItemData : ScriptableObject
 {
     public int ID;

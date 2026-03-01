@@ -1,33 +1,37 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour, IDamagable
 {
-    [SerializeField] private int maxHealth = 100;
-    private float currentHealth;
+    [SerializeField] private int _maxHealth = 100;
+    private float _currentHealth;
+
+    public float CurrentHealth => _currentHealth;
+    public float MaxHealth => _maxHealth;
 
     public event Action OnHealthChanged;
+    public event Action<PlayerHealth> OnMaxHealthChanged;
 
-    void Start()
+    void Awake()
     {
-        currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
     }
 
     public void Heal(float amount)
     {
-        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        _currentHealth = Mathf.Min(_currentHealth + amount, _maxHealth);
         OnHealthChanged?.Invoke();
-        Debug.Log($"Player healed by {amount}, current health: {currentHealth}");
     }
 
     public void TakeDamage(DamageAttribute damage)
     {
-        currentHealth -= damage.DamageAmount;
+        _currentHealth -= damage.DamageAmount;
         OnHealthChanged?.Invoke();
-        Debug.Log($"Player took {damage.DamageAmount} damage, current health: {currentHealth}");
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
             Die();
         }
@@ -35,6 +39,8 @@ public class PlayerHealth : MonoBehaviour, IDamagable
 
     private void Die()
     {
-        // Handle player death (e.g., respawn, game over)
+        IWorldTime worldTime = WorldTime.Instance;
+        worldTime.SetTime(WorldTime.TimeOfDay.Morning); // Reset time to morning on death and add 1 day
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

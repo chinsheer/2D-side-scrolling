@@ -34,6 +34,9 @@ public class WorldTime : MonoBehaviour, IWorldTime
     public float CurrentTime { get => _currentTime; }
     public float CurrentHour { get => _currentTime / 3600f; }
     public int CurrentDay { get => _currentDay; }
+
+    public event System.Action<int> OnDayChanged;
+
     public TimeOfDay CurrentTimeOfDay
     {
         get
@@ -95,6 +98,7 @@ public class WorldTime : MonoBehaviour, IWorldTime
     public void AddTime(int days)
     {
         _currentDay += days;
+        OnDayChanged?.Invoke(_currentDay);
     }
 
     public void SetTime(float hours)
@@ -103,6 +107,7 @@ public class WorldTime : MonoBehaviour, IWorldTime
         if(hours < CurrentHour)
         {
             _currentDay++;
+            OnDayChanged?.Invoke(_currentDay);
         }
         _currentTime = hours * 3600f;
     }
@@ -110,6 +115,7 @@ public class WorldTime : MonoBehaviour, IWorldTime
     public void SetTime(int day)
     {
         _currentDay = day;
+        OnDayChanged?.Invoke(_currentDay);
     }
 
     public void SetTime(TimeOfDay timeOfDay)
@@ -139,5 +145,6 @@ public class WorldTime : MonoBehaviour, IWorldTime
     {
         _currentTime = 0f;
         _currentDay++;
+        OnDayChanged?.Invoke(_currentDay);
     }
 }
