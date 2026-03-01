@@ -3530,6 +3530,12 @@ MonoBehaviour:
     quantity: 10
   - item: {fileID: 11400000, guid: 65d152ad427877a41a668939e5b126f9, type: 2}
     quantity: 10
+  - item: {fileID: 11400000, guid: 65d152ad427877a41a668939e5b126f9, type: 2}
+    quantity: 10
+  - item: {fileID: 11400000, guid: effcb68e36b22e14d9b9e5c4633eebe2, type: 2}
+    quantity: 20
+  - item: {fileID: 11400000, guid: effcb68e36b22e14d9b9e5c4633eebe2, type: 2}
+    quantity: 20
   inventoryType: 0
 --- !u!4 &651015299
 Transform:
@@ -11516,7 +11522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_AnchorMin.x
@@ -11524,23 +11530,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3264701581746731640, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7410383820923420838, guid: 15fce518f2a5f8548b07662a03fe9f99, type: 3}
       propertyPath: m_Pivot.x

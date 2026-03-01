@@ -48,7 +48,7 @@ public class PlayerCombat : MonoBehaviour
 
                 if (result.Success)
                 {
-                    _hotbarInventory.RemoveItem(new ItemStack { item = selectedSlot.item, quantity = 1 }); // Reduce the quantity based on the use result
+                    _hotbarInventory.RemoveItem(new ItemStack { item = selectedSlot.item, quantity = result.consumedQuantity }); // Reduce the quantity based on the use result
                     _hotbarInventoryUI.RefreshUI(); // Calling RefreshUI in combat is not practical
                 }
             }

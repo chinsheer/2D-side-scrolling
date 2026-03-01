@@ -5,5 +5,5 @@ public class ItemStack
     public int quantity;
 
     public bool IsEmpty => item == null;
-    public bool CanStack(ItemData newItem) => item != null && item.ID == newItem.ID && item.IsStackable;
+    public bool CanStack(ItemData newItem) => item != null && item == newItem && item.IsStackable;
 }
