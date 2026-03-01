@@ -15,7 +15,7 @@ public class SlimeFactory : EnemyFactory
 
         //config
         EnemyHealth enemyHealth = slimeObject.GetComponentInChildren<EnemyHealth>();
-        IDamageConfigurable damageConfigurable = slimeObject.GetComponent<IDamageConfigurable>();
+        IDamageConfigurable damageConfigurable = slimeObject.GetComponentInChildren<IDamageConfigurable>();
         SlimeAI enemyAI = slimeObject.GetComponent<SlimeAI>();
         EnemyMovement enemyMovement = slimeObject.GetComponent<EnemyMovement>();
 

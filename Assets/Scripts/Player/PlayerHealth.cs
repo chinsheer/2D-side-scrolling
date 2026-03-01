@@ -23,14 +23,12 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     {
         _currentHealth = Mathf.Min(_currentHealth + amount, _maxHealth);
         OnHealthChanged?.Invoke();
-        Debug.Log($"Player healed by {amount}, current health: {_currentHealth}");
     }
 
     public void TakeDamage(DamageAttribute damage)
     {
         _currentHealth -= damage.DamageAmount;
         OnHealthChanged?.Invoke();
-        Debug.Log($"Player took {damage.DamageAmount} damage, current health: {_currentHealth}");
         if (_currentHealth <= 0)
         {
             Die();
