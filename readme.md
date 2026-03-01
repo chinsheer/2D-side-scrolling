@@ -1,6 +1,10 @@
 # 2D side-scrolling game
 ## 🎮 Demo
-[Play the WebGL Demo][HERE](https://staging.d3h857w88qolqv.amplifyapp.com)
+[Play the WebGL Demo][HERE](https://staging.d3h857w88qolqv.amplifyapp.com)  
+WASD Space - Movement  
+E - Inventory  
+LM - Shoot/Use  
+RM - Aim(only for aimable item)  
 ## Development logs
 ### 26 Feb, 2026
 **15:00 PM** - Initiate base game.  
