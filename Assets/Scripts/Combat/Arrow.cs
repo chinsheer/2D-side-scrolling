@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour, IProjectile
+public class Arrow : MonoBehaviour, IProjectile, IDamageSource, IDamageConfigurable
 {
-    private int _damage;
     private Rigidbody2D _rb;
+    private DamageAttribute _damage;
+    public DamageAttribute Damage => _damage;
+
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -13,10 +15,14 @@ public class Arrow : MonoBehaviour, IProjectile
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Initialize(int damage, Vector2 initialVelocity)
+    public void Initialize(Vector2 initialVelocity)
     {
-        _damage = damage;
         _rb.velocity = initialVelocity; // Adjust speed as needed
+    }
+
+    public void ConfigureDamage(DamageAttribute damageAttribute)
+    {
+        _damage = damageAttribute;
     }
     
     // Update is called once per frame

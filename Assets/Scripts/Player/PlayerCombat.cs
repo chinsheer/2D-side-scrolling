@@ -22,15 +22,36 @@ public class PlayerCombat : MonoBehaviour
 
     public void TryUseItem()
     {
-        var selectedSlot = _hotbarInventory.Slots[_hotbarInventory.SelectedSlotIndex];
-        if (selectedSlot.item != null && selectedSlot.item.UseAction != null)
+        var selectedSlot = _hotbarInventory.Slots[_hotbarInventoryUI.SelectedSlotIndex];
+        if (selectedSlot.item != null)
         {
-            UseContext context = new UseContext
+
+            if (selectedSlot.item is IPlaceableItem placeableItem)
             {
-                User = gameObject,
-                HandPosition = _handPosition
-            };
-            selectedSlot.item.UseAction.Use(context);
+                // Handle placing the item in the world
+                GameObject prefabToPlace = placeableItem.GetPlaceablePrefab();
+                Instantiate(prefabToPlace, _handPosition, Quaternion.identity);
+                selectedSlot.quantity -= 1;
+                _hotbarInventoryUI.RefreshUI();
+
+            }
+
+            else if (selectedSlot.item is IUsableItem usableItem)
+            {
+                UseResult result = usableItem.Use(new UseContext
+                {
+                    User = gameObject,
+                    HandPosition = _handPosition,
+                    inventory = _hotbarInventory,
+                    ItemData = selectedSlot.item
+                });
+
+                if (result.Success)
+                {
+                    selectedSlot.quantity -= result.consumedQuantity; // Reduce the quantity based on the use result
+                    _hotbarInventoryUI.RefreshUI(); // Calling RefreshUI in combat is not practical
+                }
+            }
         }
     }
 
@@ -41,7 +62,12 @@ public class PlayerCombat : MonoBehaviour
 
     public void StartAiming(Vector2 mousePosition)
     {
-        _currentAimIndicator = Instantiate(_aimIndicatorPrefab, _handPosition, Quaternion.identity); // Show the aiming indicator at the hand position
+        var selectedSlot = _hotbarInventory.Slots[_hotbarInventoryUI.SelectedSlotIndex];
+        if (selectedSlot.item is IAimableItem)
+        {
+            _currentAimIndicator = Instantiate(_aimIndicatorPrefab, _handPosition, Quaternion.identity); // Show the aiming indicator at the hand position
+            SetHandPosition(mousePosition);
+        }
     }
 
     public void StopAiming()
@@ -50,6 +76,7 @@ public class PlayerCombat : MonoBehaviour
         {
             Destroy(_currentAimIndicator);
             _currentAimIndicator = null;
+            _handPosition = Vector2.right; // Reset hand position to default (can be adjusted as needed)
         }
     }
 

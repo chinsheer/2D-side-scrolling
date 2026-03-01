@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d77ac316d79694d9857fd70f38f2e6, type: 3}
+  m_Name: StoneSword
+  m_EditorClassIdentifier: 
+  ID: 0
+  ItemName: Stone Sword
+  ItemIcon: {fileID: -1674346415, guid: 49484cde4fff1f24096ee6ed22d58f76, type: 3}
+  IsStackable: 0
+  MaxStackSize: 1
+  ItemDescription: Random stone tied up with stick
+  Damage:
+    DamageAmount: 3
+    KnockbackDirection: {x: 1, y: 0}
+    KnockbackStrength: 3
+  SwingEffectPrefab: {fileID: 8948257775540878119, guid: 0141043c1f36e7d41b90edcf0bbf484d, type: 3}
