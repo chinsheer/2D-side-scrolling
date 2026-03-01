@@ -2,20 +2,23 @@ using UnityEngine;
 
 public class WorldEnemySpawner : MonoBehaviour
 {
-    [SerializeField] private EnemyFactory[] _enemyFactory;
+    [SerializeField] private SlimeFactory _enemyFactory;
+
+    //Special mini slime spawner
+    [SerializeField] private SlimeFactory _miniSlimeFactory;
 
     private void Start()
     {
-        for (int i = 0; i < _enemyFactory.Length; i++)
-        {
-            _enemyFactory[i].InitializePool(10); // Initialize each factory's pool with a size of 10
-        }
+        _enemyFactory.InitializePool(10);
+        _miniSlimeFactory.InitializePool(20);
+        _enemyFactory.OnSlimeDeath += SpawnMiniSlime; // Subscribe to the slime death event to spawn mini slimes
+        
         WorldTime.Instance.OnDayChanged += SpawnEnemy;
     }
 
     public void SpawnEnemy(int day)
     {
-        _enemyFactory[Random.Range(0, _enemyFactory.Length)].SpawnEnemy(new SpawnContext{
+        _enemyFactory.SpawnEnemy(new SpawnContext{
             SpawnPosition = new Vector3(Random.Range(-10f, 10f), 0, 0), // Random spawn position for demonstration
             SpawnRotation = Quaternion.identity
         });
@@ -23,5 +26,18 @@ public class WorldEnemySpawner : MonoBehaviour
     private void OnDisable()
     {
         if (WorldTime.Instance != null) WorldTime.Instance.OnDayChanged -= SpawnEnemy;
+    }
+
+    public void SpawnMiniSlime(Vector2 position)
+    {
+        if (_miniSlimeFactory != null)
+        {
+            for (int i = 0; i < 3; i++)
+            _miniSlimeFactory.SpawnEnemy(new SpawnContext
+            {
+                SpawnPosition = position,
+                SpawnRotation = Quaternion.identity
+            });
+        }
     }
 }

@@ -7,6 +7,8 @@ public class SlimeFactory : EnemyFactory
     [SerializeField] private int _slimeHealth = 20;
     [SerializeField] private DamageAttribute _slimeDamage;
 
+    public event System.Action<Vector2> OnSlimeDeath;
+
     public override EnemyController SpawnEnemy(SpawnContext context)
     {
         EnemyController enemyController;
@@ -37,6 +39,9 @@ public class SlimeFactory : EnemyFactory
         enemyController.Initialize(enemyHealth);
         enemyController.SetPool(_enemyPool);
         slimeObject.SetActive(true);
+
+        enemyHealth.OnDeath += () => OnSlimeDeath?.Invoke(slimeObject.transform.position);
+
         return enemyController;
     }
 }

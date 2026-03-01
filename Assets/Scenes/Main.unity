@@ -4508,8 +4508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36110deb1528aa347b12793fbbe3b295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyFactory:
-  - {fileID: 11400000, guid: 9646e6a1542d3f246b6e9e73fdbdf360, type: 2}
+  _enemyFactory: {fileID: 11400000, guid: 9646e6a1542d3f246b6e9e73fdbdf360, type: 2}
+  _miniSlimeFactory: {fileID: 11400000, guid: e659ae72f04dd1f4cbcf73e5fce5746b, type: 2}
 --- !u!4 &768209168
 Transform:
   m_ObjectHideFlags: 0

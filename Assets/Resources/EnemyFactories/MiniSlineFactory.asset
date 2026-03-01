@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc6494812ef0bf47b0f44fd2e6ab2a2, type: 3}
+  m_Name: MiniSlineFactory
+  m_EditorClassIdentifier: 
+  _enemyPrefab: {fileID: 3291885478235007649, guid: 3d1d44b05a6872445a55eb62a174a0d1, type: 3}
+  _initialPoolSize: 20
+  _slimeHealth: 5
+  _slimeDamage:
+    DamageAmount: 2
+    KnockbackDirection: {x: 0, y: 0}
+    KnockbackStrength: 0
