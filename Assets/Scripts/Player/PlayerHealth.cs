@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour, IDamagable
 {
     [SerializeField] private int _maxHealth = 100;
+    [SerializeField] private DamageIndicator _damageIndicatorPrefab;
     private float _currentHealth;
 
     public float CurrentHealth => _currentHealth;
@@ -28,6 +29,13 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     {
         _currentHealth -= damage.DamageAmount;
         OnHealthChanged?.Invoke();
+
+        if (_damageIndicatorPrefab != null)
+        {
+            DamageIndicator damageIndicator = Instantiate(_damageIndicatorPrefab, transform.position, Quaternion.identity);
+            damageIndicator.Initialize(damage.DamageAmount);
+        }
+
         if (_currentHealth <= 0)
         {
             Die();

@@ -33,11 +33,12 @@ public class CraftItemUI : MonoBehaviour
         nameText.text = _recipeData.ResultItem.item.ItemName;
         quantityText.text = "x" + data.CraftableQuantity.ToString();
         backgroundImage.sprite = data.IsSelected ? SelectedBackground : NormalBackground;
+        button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => OnSelected?.Invoke(Index));
 
     }
 
-    public void toggleSelection(bool isSelected)
+    public void ToggleSelection(bool isSelected)
     {
         var backgroundImage = GetComponent<UnityEngine.UI.Image>();
         backgroundImage.sprite = isSelected ? SelectedBackground : NormalBackground;

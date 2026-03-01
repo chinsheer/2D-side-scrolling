@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c978dd557cc8dd74ca501ae20409199c, type: 3}
-  m_Name: HealthPotion1
+  m_Script: {fileID: 11500000, guid: 504d825bd70b72e4fa5b6e692bc0e2e3, type: 3}
+  m_Name: Bottle
   m_EditorClassIdentifier: 
-  ID: 0
-  ItemName: Health Potion
-  ItemIcon: {fileID: 1726392591, guid: 49484cde4fff1f24096ee6ed22d58f76, type: 3}
+  ID: 4
+  ItemName: Bottle
+  ItemIcon: {fileID: -1728737038, guid: 49484cde4fff1f24096ee6ed22d58f76, type: 3}
   IsStackable: 1
   MaxStackSize: 32
-  ItemDescription: Heal for 5 point
-  HealAmount: 5
+  ItemDescription: Can contain potion

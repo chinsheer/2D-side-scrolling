@@ -9,6 +9,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Inventory _hotbarInventory; // Reference to the player's inventory data
     [SerializeField] private GameObject _aimIndicatorPrefab; // Prefab for the aiming indicator
 
+    [SerializeField] private PlayerHealth _playerHealth; // Reference to the player's health component
+
     private Vector2 _handPosition;
     private GameObject _currentAimIndicator;
 
@@ -43,7 +45,8 @@ public class PlayerCombat : MonoBehaviour
                     User = gameObject,
                     HandPosition = _handPosition,
                     inventory = _hotbarInventory,
-                    ItemData = selectedSlot.item
+                    ItemData = selectedSlot.item,
+                    playerHealth = _playerHealth
                 });
 
                 if (result.Success)

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4ccfbed60d03944b8e0cd5292fa1df, type: 3}
+  m_Name: BloodWand
+  m_EditorClassIdentifier: 
+  ID: 0
+  ItemName: Blood Wand
+  ItemIcon: {fileID: 1753352938, guid: 49484cde4fff1f24096ee6ed22d58f76, type: 3}
+  IsStackable: 0
+  MaxStackSize: 1
+  ItemDescription: Consume 5 HP on use
+  Damage:
+    DamageAmount: 10
+    KnockbackDirection: {x: 0, y: 0}
+    KnockbackStrength: 0
+  HealthCost: 5
+  Speed: 20
+  ProjectilePrefab: {fileID: 684088608783484586, guid: b18d89fc014c62e43b2c86d6f5361c5f, type: 3}

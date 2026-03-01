@@ -3557,6 +3557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recipes:
   - {fileID: 11400000, guid: d5b4bc1ff8725cd49b054b553aeae3e2, type: 2}
+  - {fileID: 11400000, guid: 8262c48746b383b42bb89b42eba9a150, type: 2}
 --- !u!114 &596529780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7905,6 +7906,7 @@ MonoBehaviour:
   _hotbarInventoryUI: {fileID: 323929648}
   _hotbarInventory: {fileID: 1674270635}
   _aimIndicatorPrefab: {fileID: 7363598847243268172, guid: c0e3424ce06a7f349ba0d45330a8ed62, type: 3}
+  _playerHealth: {fileID: 1958921351}
 --- !u!1 &1459023446
 GameObject:
   m_ObjectHideFlags: 0
@@ -9077,6 +9079,8 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 8aca5fca3bc9dc34e8d32669ed9ec9ab, type: 2}
     quantity: 1
   - item: {fileID: 11400000, guid: 55b841fff006d6843a499917942a5f4a, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: 861e1c19e4073544097cf0ac1dceefd4, type: 2}
     quantity: 1
   inventoryType: 1
 --- !u!4 &1674270636
@@ -11010,6 +11014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _damageIndicatorPrefab: {fileID: 5934080690718926224, guid: 560f4217c088291428797c7689266e7d, type: 3}
 --- !u!61 &1958921352
 BoxCollider2D:
   m_ObjectHideFlags: 0

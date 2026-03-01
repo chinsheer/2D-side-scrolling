@@ -58,15 +58,15 @@ public class CraftListUI : MonoBehaviour
 
     public void RefreshSelectedRecipe(int selectedIndex)
     {
-        _selectedIndex = selectedIndex;
         var recipes = _craftingProvider.AvailableRecipes;
         if (recipes.Count == 0) return;
 
         CraftItemUI selectedCraftItemUI = transform.GetChild(_selectedIndex).GetComponent<CraftItemUI>();
-        selectedCraftItemUI.toggleSelection(false);
+        selectedCraftItemUI.ToggleSelection(false);
         CraftItemUI newSelectedCraftItemUI = transform.GetChild(selectedIndex).GetComponent<CraftItemUI>();
-        newSelectedCraftItemUI.toggleSelection(true);
+        newSelectedCraftItemUI.ToggleSelection(true);
         OnChangeSelectedRecipe?.Invoke(selectedIndex);
+        _selectedIndex = selectedIndex;
     }
 
 }
