@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour, IDamagable
 {
@@ -37,6 +39,8 @@ public class PlayerHealth : MonoBehaviour, IDamagable
 
     private void Die()
     {
-        // Handle player death (e.g., respawn, game over)
+        IWorldTime worldTime = WorldTime.Instance;
+        worldTime.SetTime(WorldTime.TimeOfDay.Morning); // Reset time to morning on death and add 1 day
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
