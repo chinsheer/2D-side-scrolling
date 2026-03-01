@@ -1,4 +1,6 @@
 # 2D side-scrolling game
+## 🎮 Demo
+[Play the WebGL Demo][HERE](https://staging.d3h857w88qolqv.amplifyapp.com)
 ## Development logs
 ### 26 Feb, 2026
 **15:00 PM** - Initiate base game.  
