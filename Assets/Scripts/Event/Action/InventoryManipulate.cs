@@ -11,13 +11,11 @@ public class InventoryManipulate : EventAction
     }
     
     public ManipulateType Type;
-    public ItemData Item;
-    public int Quantity;
+    public ItemStack[] Items;
     public Inventory.InventoryType InventoryType; 
 
     public override void Execute(EventContext context)
     {
-        ItemStack itemStack = new ItemStack { item = Item, quantity = Quantity };
         Inventory targetInventory = null;
         foreach (var inv in context.PlayerInventory)
         {
@@ -30,10 +28,16 @@ public class InventoryManipulate : EventAction
         switch (Type)
         {
             case ManipulateType.AddItem:
-                targetInventory.AddItem(itemStack);
+                foreach (var itemStack in Items)
+                {
+                    targetInventory.AddItem(itemStack);
+                }
                 break;
             case ManipulateType.RemoveItem:
-                targetInventory.RemoveItem(itemStack);
+                foreach (var itemStack in Items)
+                {
+                    targetInventory.RemoveItem(itemStack);
+                }
                 break;
             case ManipulateType.ClearInventory:
                 targetInventory.Clear();
