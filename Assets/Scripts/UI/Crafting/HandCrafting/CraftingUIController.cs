@@ -14,7 +14,7 @@ public class CraftingUIController : MonoBehaviour, IUIPageController
     [SerializeField] private HandCraftStation _handCraftStationProvider;
     private ICraftingProvider _craftingProvider;
 
-    void Start()
+    public void Initialize()
     {
         _craftingProvider ??= _handCraftStationProvider as ICraftingProvider;
         _craftList.Initialize(_craftingProvider, _inventory);
@@ -80,6 +80,7 @@ public class CraftingUIController : MonoBehaviour, IUIPageController
     public void Close()
     {
         gameObject.SetActive(false);
+        _craftList.OnChangeSelectedRecipe -= UpdatePreview; // Unsubscribe to prevent memory leaks
     }
 
     public void RefreshUI()

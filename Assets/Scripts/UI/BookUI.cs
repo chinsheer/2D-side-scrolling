@@ -10,7 +10,7 @@ public class BookUI : MonoBehaviour
         if (gameObject.activeSelf)
         {
             // This is hardcoded for simplicity. fixed later
-            FindObjectOfType<InventoryUI>().RefreshUI();
+            GetComponentInChildren<PageController>(true)?.OpenPage(PageController.PageType.Item);
         }
     }
 }

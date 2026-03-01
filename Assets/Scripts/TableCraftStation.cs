@@ -31,12 +31,12 @@ public class TableCraftStation : MonoBehaviour, ICraftingProvider
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.GetComponentInChildren<CraftingUIController>(true)?.Bind(this);
+        collision.GetComponentInChildren<PageController>(true)?.BindCraftingProvider(this);
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        collision.GetComponentInChildren<CraftingUIController>(true)?.Unbind(this);
+        collision.GetComponentInChildren<PageController>(true)?.UnbindCraftingProvider(this);
     }
 
 }

@@ -31,7 +31,7 @@ public class PlayerCombat : MonoBehaviour
                 // Handle placing the item in the world
                 GameObject prefabToPlace = placeableItem.GetPlaceablePrefab();
                 Instantiate(prefabToPlace, _handPosition, Quaternion.identity);
-                selectedSlot.quantity -= 1;
+                _hotbarInventory.RemoveItem(new ItemStack { item = selectedSlot.item, quantity = 1 }); // Remove the item from inventory after placing
                 _hotbarInventoryUI.RefreshUI();
 
             }
@@ -48,7 +48,7 @@ public class PlayerCombat : MonoBehaviour
 
                 if (result.Success)
                 {
-                    selectedSlot.quantity -= result.consumedQuantity; // Reduce the quantity based on the use result
+                    _hotbarInventory.RemoveItem(new ItemStack { item = selectedSlot.item, quantity = result.consumedQuantity }); // Reduce the quantity based on the use result
                     _hotbarInventoryUI.RefreshUI(); // Calling RefreshUI in combat is not practical
                 }
             }

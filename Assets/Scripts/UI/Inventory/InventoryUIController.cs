@@ -7,7 +7,7 @@ public class InventoryUIController : MonoBehaviour, IUIPageController
     [SerializeField] private InventoryUI _hotbarInventoryUI;
     [SerializeField] private ItemDescriptionUI _itemDescription;
 
-    void Start()
+    public void Initialize()
     {
         _inventoryUI.OnSlotClicked += UpdateSelectedItemDescription;
         _inventoryUI.Initialize(_inventory);
@@ -28,6 +28,7 @@ public class InventoryUIController : MonoBehaviour, IUIPageController
     public void Close()
     {
         gameObject.SetActive(false);
+        _inventoryUI.OnSlotClicked -= UpdateSelectedItemDescription; // Unsubscribe to prevent memory leaks
     }
     public void RefreshUI()
     {
