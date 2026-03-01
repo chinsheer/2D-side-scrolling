@@ -143,7 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397f1b4bc9e0b83488978865fbe59d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
 --- !u!1 &3291885478235007649
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,8 +155,10 @@ GameObject:
   - component: {fileID: 4471525177517263607}
   - component: {fileID: 5018884051363559880}
   - component: {fileID: 6072597589466561880}
-  - component: {fileID: 1736662285222927447}
-  - component: {fileID: 5205754529283411083}
+  - component: {fileID: 158736359831767525}
+  - component: {fileID: 6959927899455344986}
+  - component: {fileID: 130033751105900622}
+  - component: {fileID: 2402735146939847104}
   m_Layer: 11
   m_Name: Slime
   m_TagString: Untagged
@@ -248,7 +249,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -260,7 +261,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &6072597589466561880
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -296,7 +297,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &1736662285222927447
+--- !u!114 &158736359831767525
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,14 +306,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 3291885478235007649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 458bdb79e75bf8d4a817e27d711e97b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e81ea92cc77bab4384d038ac5ddaf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 3
-  _jumpForce: 4
-  _enemyHealth: {fileID: 0}
-  _deathEffectPrefab: {fileID: 0}
---- !u!114 &5205754529283411083
+  _deathEffectPrefab: {fileID: 3840397789590115771, guid: 639465133c53d394db53c160b9d8c273, type: 3}
+--- !u!114 &6959927899455344986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291885478235007649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c15d1faae3dc142963a45e3f2405fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &130033751105900622
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -324,9 +334,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b667a3ad349f2548a3a7d995ffa1e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DetectionRange: 5
-  AttackRange: 2
-  TimeBetweenDirectionChanges: {x: 1, y: 3}
+--- !u!114 &2402735146939847104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291885478235007649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c00021f4f4651409dfb7fc92295290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7167961084842294013
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,4 +489,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c15d1faae3dc142963a45e3f2405fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5

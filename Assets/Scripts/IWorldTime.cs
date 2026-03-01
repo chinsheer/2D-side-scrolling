@@ -14,4 +14,6 @@ public interface IWorldTime
     void SetTime(WorldTime.WeekDay weekDay);
 
     void StartNewDay();
+
+    event System.Action<int> OnDayChanged;
 }

@@ -5,27 +5,24 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IDamagable
 {
-    public float maxHealth = 20;
-    private float currentHealth;
+    private float _currentHealth;
+    private float _maxHealth;
 
     public event Action OnDeath; // Event to notify when the enemy dies
 
-    void Start()
+    public void Initialize(int maxHealth)
     {
-        currentHealth = maxHealth;
+        _maxHealth = maxHealth;
+        _currentHealth = maxHealth;
     }
 
     public void TakeDamage(DamageAttribute damageAttribute)
     {
-        currentHealth -= damageAttribute.DamageAmount;
-        if (currentHealth <= 0)
+        _currentHealth -= damageAttribute.DamageAmount;
+        if (_currentHealth <= 0)
         {
-            Die();
+            _currentHealth = 0;
+            OnDeath?.Invoke(); // Trigger the OnDeath event
         }
-    }
-
-    private void Die()
-    {
-        OnDeath?.Invoke(); // Trigger the OnDeath event
     }
 }
