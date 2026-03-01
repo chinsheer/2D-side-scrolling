@@ -22,7 +22,6 @@ public class GameObjectPool<T> where T : Component
         if (_stack.Count > 0)
         {
             T obj = _stack.Pop();
-            obj.gameObject.SetActive(true);
             return obj;
         }
         // If the pool is empty, instantiate a new object
@@ -31,7 +30,6 @@ public class GameObjectPool<T> where T : Component
 
     public void Return(T obj)
     {
-        obj.gameObject.SetActive(false);
         _stack.Push(obj);
     }
 }

@@ -10,16 +10,18 @@ public class WorldEnemySpawner : MonoBehaviour
         {
             _enemyFactory[i].InitializePool(10); // Initialize each factory's pool with a size of 10
         }
+        WorldTime.Instance.OnDayChanged += SpawnEnemy;
+    }
 
-        // Example of spawning enemies when day changes
-        WorldTime.Instance.OnDayChanged += (day) => SpawnEnemy(new SpawnContext{
+    public void SpawnEnemy(int day)
+    {
+        _enemyFactory[Random.Range(0, _enemyFactory.Length)].SpawnEnemy(new SpawnContext{
             SpawnPosition = new Vector3(Random.Range(-10f, 10f), 0, 0), // Random spawn position for demonstration
             SpawnRotation = Quaternion.identity
         });
     }
-
-    public void SpawnEnemy(SpawnContext context)
+    private void OnDisable()
     {
-        _enemyFactory[Random.Range(0, _enemyFactory.Length)].SpawnEnemy(context);
+        if (WorldTime.Instance != null) WorldTime.Instance.OnDayChanged -= SpawnEnemy;
     }
 }

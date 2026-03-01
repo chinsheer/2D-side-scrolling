@@ -18,6 +18,7 @@ public class Arrow : MonoBehaviour, IProjectile, IDamageSource, IDamageConfigura
     public void Initialize(Vector2 initialVelocity)
     {
         _rb.velocity = initialVelocity; // Adjust speed as needed
+        FixLook(); // Ensure the arrow is oriented correctly at the start
     }
 
     public void ConfigureDamage(DamageAttribute damageAttribute)
@@ -28,7 +29,12 @@ public class Arrow : MonoBehaviour, IProjectile, IDamageSource, IDamageConfigura
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, _rb.velocity); // Rotate the arrow to face the direction it's moving
+        FixLook();
+    }
+
+    void FixLook()
+    {
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, _rb.velocity); 
     }
 
     void OnTriggerEnter2D(Collider2D collision)

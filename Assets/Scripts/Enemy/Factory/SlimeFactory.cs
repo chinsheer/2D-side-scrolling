@@ -9,8 +9,19 @@ public class SlimeFactory : EnemyFactory
 
     public override EnemyController SpawnEnemy(SpawnContext context)
     {
-        GameObject slimeObject = Instantiate(_enemyPrefab, context.SpawnPosition, context.SpawnRotation);
-        EnemyController enemyController = slimeObject.GetComponent<EnemyController>();
+        EnemyController enemyController;
+        if(_enemyPool == null)
+        {
+            InitializePool(_initialPoolSize);
+            enemyController = _enemyPool.Get();
+        }
+        else
+        {
+            enemyController = _enemyPool.Get();
+        }
+        GameObject slimeObject = enemyController.gameObject;
+        slimeObject.transform.position = context.SpawnPosition;
+        slimeObject.transform.rotation = context.SpawnRotation;
         enemyController.OnSpawn();
 
         //config
@@ -21,11 +32,11 @@ public class SlimeFactory : EnemyFactory
 
         enemyAI.Initialize();
         damageConfigurable.ConfigureDamage(_slimeDamage);
-        enemyHealth.OnDeath += enemyController.OnDespawn; // Subscribe to the OnDeath event
         enemyHealth.Initialize(_slimeHealth);
         enemyMovement.Initialize(enemyAI, 2f); // Initialize with AI and speed
         enemyController.Initialize(enemyHealth);
         enemyController.SetPool(_enemyPool);
+        slimeObject.SetActive(true);
         return enemyController;
     }
 }
