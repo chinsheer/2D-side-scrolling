@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour, IPoolable
     {
         // Clean up enemy state when despawned
         gameObject.SetActive(false);
-        _enemyPool.Return(this);
         StopAllCoroutines(); // Stop any ongoing coroutines (Player detection)
+        _enemyPool.Return(this);
     }
 }
