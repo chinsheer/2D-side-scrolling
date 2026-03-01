@@ -7,6 +7,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 {
     private float _currentHealth;
     private float _maxHealth;
+    [SerializeField] private DamageIndicator _damageIndicatorPrefab;
 
     public event Action OnDeath; // Event to notify when the enemy dies
 
@@ -19,6 +20,11 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     public void TakeDamage(DamageAttribute damageAttribute)
     {
         _currentHealth -= damageAttribute.DamageAmount;
+        if (_damageIndicatorPrefab != null)
+        {
+            DamageIndicator damageIndicator = Instantiate(_damageIndicatorPrefab, transform.position, Quaternion.identity);
+            damageIndicator.Initialize(damageAttribute.DamageAmount);
+        }
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;

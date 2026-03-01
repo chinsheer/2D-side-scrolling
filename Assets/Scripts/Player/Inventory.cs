@@ -103,6 +103,23 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
+    public bool RemoveItem(int index)
+    {
+        if (index >= 0 && index < slots.Count)
+        {
+            var slot = slots[index];
+            if (!slot.IsEmpty)
+            {
+                slot.item = null;
+                slot.quantity = 0;
+                OnInventoryChanged?.Invoke();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void Clear()
     {
         foreach (var slot in slots)

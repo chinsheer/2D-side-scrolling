@@ -10,6 +10,7 @@ public struct UseContext
     public GameObject User;
     public Vector2 HandPosition;
     public Inventory inventory;
+    public PlayerHealth playerHealth;
 
     public ItemData ItemData;
 }
