@@ -11,9 +11,26 @@ public class InventoryUI : MonoBehaviour
     private int _selectedSlotIndex = 0;
     public int SelectedSlotIndex => _selectedSlotIndex;
 
+    public void Awake()
+    {
+        if (_inventory != null)
+        {
+            Initialize(_inventory);
+        }
+    }
+
     public void Initialize(Inventory inventory)
     {
+        // Unsubscribe from previous inventory events if changing inventory
+        if(_inventory != null && inventory == null)
+        {
+            _inventory.OnInventoryChanged -= RefreshUI; // Unsubscribe from previous inventory events
+        }
         _inventory = inventory;
+        if(_inventory == null) {
+            DisableUI();
+            return;
+        }
         _inventory.OnInventoryChanged += RefreshUI;
         RefreshUI();
         RefreshSelectedSlot(_selectedSlotIndex); // Highlight the initially selected slot
@@ -21,6 +38,10 @@ public class InventoryUI : MonoBehaviour
 
     public void RefreshUI()
     {
+        if (_inventory == null) {
+            DisableUI();
+            return;
+        }
         for (int i = 0; i < _inventory.Capacity; i++)
         {
             var slot = _inventory.Slots[i];
@@ -39,6 +60,14 @@ public class InventoryUI : MonoBehaviour
             slotUI.Initialize(_inventory, i);
             slotUI.SetSelected(i == _selectedSlotIndex);
             slotUI.OnSlotClicked += RefreshSelectedSlot; // Subscribe to slot click event
+        }
+    }
+
+    private void DisableUI()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
         }
     }
 
