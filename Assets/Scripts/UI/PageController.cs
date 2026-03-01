@@ -92,6 +92,5 @@ public class PageController : MonoBehaviour
     public void UnbindChestInventory()
     {
         _chestUIController.Bind(null);
-        _chestUIController.Close();
     }
 }

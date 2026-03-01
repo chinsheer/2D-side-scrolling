@@ -56,6 +56,7 @@ public class InventoryUI : MonoBehaviour
             {
                 placeHolder = Instantiate(SlotPrefab, transform).transform;
             }
+            placeHolder.gameObject.SetActive(true);
             var slotUI = placeHolder.GetComponent<InventorySlotUI>();
             slotUI.Initialize(_inventory, i);
             slotUI.SetSelected(i == _selectedSlotIndex);
